@@ -1,7 +1,7 @@
 // Login.tsx
 import { useEffect, useState } from 'react';
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from 'firebase/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { auth } from '../components/firebase';
 
@@ -108,7 +108,7 @@ const Login = () => {
                 </div>
 
                 <div className='w-full flex items-center justify-center mt-10'>
-                    <p className='text-sm font-normal text-gray-400'>Don't have an account? <span className='font-semibold text-white cursor-pointer underline'><Link to="/signup">Sign Up</Link></span></p>
+                    <p className='text-sm font-normal text-gray-400'>Don't have an account? <span className='font-semibold text-white cursor-pointer underline'><a href='/signup'>Sign Up</a></span></p>
                 </div>
             </div>
         </div>

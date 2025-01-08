@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';  // Import Firestore methods
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { firestore } from '../components/firebase';
 
@@ -157,7 +157,7 @@ const Signup = () => {
           <p className="text-sm font-normal text-gray-400">
             Already have an account?{' '}
             <span className="font-semibold text-white cursor-pointer underline">
-            <Link to="/login">Login</Link>
+              <a href="/login">Log In</a>
             </span>
           </p>
         </div>
