@@ -27,21 +27,20 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Router>
-        <AppLayout>
-          <Routes>
-            <Route path="/" element={<AuthRoute><Home /></AuthRoute>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/home" element={<AuthRoute><Home /></AuthRoute>} />
-            <Route path="/addtask" element={<AddTask />} />
-            <Route path="/addtask/:id" element={<AddTask />} />
-            <Route path="task" element={<Task/>}/>
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </AppLayout>
-        <ToastContainer />
-
-    </Router>
+    <Router basename="/kanban_Board">
+  <AppLayout>
+    <Routes>
+      <Route path="/" element={<AuthRoute><Home /></AuthRoute>} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/home" element={<AuthRoute><Home /></AuthRoute>} />
+      <Route path="/addtask" element={<AddTask />} />
+      <Route path="/addtask/:id" element={<AddTask />} />
+      <Route path="task" element={<Task />} />
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
+  </AppLayout>
+  <ToastContainer />
+</Router>
   </React.StrictMode>
 );
