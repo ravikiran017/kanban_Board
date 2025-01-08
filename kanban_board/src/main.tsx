@@ -26,7 +26,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Router basename="/kanban_Board">
+    <Router>
       <AppLayout>
         <Routes>
           <Route path="/" element={<AuthRoute><Home /></AuthRoute>} />
