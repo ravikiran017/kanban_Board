@@ -108,7 +108,7 @@ const Login = () => {
                 </div>
 
                 <div className='w-full flex items-center justify-center mt-10'>
-                    <p className='text-sm font-normal text-gray-400'>Don't have an account? <span className='font-semibold text-white cursor-pointer underline'><Link to="/login">Login</Link></span></p>
+                    <p className='text-sm font-normal text-gray-400'>Don't have an account? <span className='font-semibold text-white cursor-pointer underline'><Link to="/signup">Sign up</Link></span></p>
                 </div>
             </div>
         </div>
