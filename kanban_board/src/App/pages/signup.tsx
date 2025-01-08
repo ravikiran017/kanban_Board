@@ -9,7 +9,7 @@ const Signup = () => {
   const auth = getAuth();
   const db = firestore;  // Use the Firestore instance
   const navigate = useNavigate();
-  
+
   const [authing, setAuthing] = useState(false);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -20,7 +20,7 @@ const Signup = () => {
   // Function to handle sign-up with Google
   const signUpWithGoogle = async () => {
     setAuthing(true);
-    
+
     signInWithPopup(auth, new GoogleAuthProvider())
       .then(async (response) => {
         const user = response.user;
@@ -31,7 +31,7 @@ const Signup = () => {
           role: "contributor",  // Assigning default role
           createdAt: new Date(),
         };
-        
+
         // Store user data in Firestore
         await setDoc(doc(db, 'users', user.uid), userData)
           .then(() => {
@@ -157,7 +157,7 @@ const Signup = () => {
           <p className="text-sm font-normal text-gray-400">
             Already have an account?{' '}
             <span className="font-semibold text-white cursor-pointer underline">
-            <Link to="/login">Login</Link>
+              <Link to="/login">Login</Link>
             </span>
           </p>
         </div>

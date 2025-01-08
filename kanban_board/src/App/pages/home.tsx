@@ -26,10 +26,10 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const database = getDatabase();
-  
+
     const columnsRef = ref(database, "Columns");
     const tasksRef = ref(database, "Task Details");
-  
+
     const unsubscribeColumns = onValue(columnsRef, (snapshot) => {
       if (snapshot.exists()) {
         const firebaseColumns = snapshot.val();
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
           title: firebaseColumns[id].title || "Untitled Column",
           tasks: [], // Placeholder for tasks, updated later
         }));
-  
+
         // Ensure "Task List" is always preserved with ID 0
         setColumns((prevColumns) => {
           const taskListColumn = prevColumns.find((col) => col.id === "0") || {
@@ -46,15 +46,15 @@ const Home: React.FC = () => {
             title: "Task List",
             tasks: prevColumns.find((col) => col.id === "0")?.tasks || [],
           };
-  
+
           return [taskListColumn, ...columns];
         });
       } else {
-          // Handle other errors
-          toast.error(`Unexpected error}`);
+        // Handle other errors
+        toast.error(`Unexpected error}`);
       }
     });
-  
+
     const unsubscribeTasks = onValue(tasksRef, (snapshot) => {
       if (snapshot.exists()) {
         const firebaseTasks = snapshot.val();
@@ -64,14 +64,14 @@ const Home: React.FC = () => {
           column_id: firebaseTasks[id].column_id || "default",
           due_date: firebaseTasks[id].due_date || "No due date",
         }));
-  
+
         setColumns((prevColumns) => {
           return prevColumns.map((col) => {
             if (col.id === "0") {
               // Task List contains all tasks
               return { ...col, tasks: tasks };
             }
-  
+
             // Filter tasks for specific columns
             const tasksForColumn = tasks.filter((task) => task.column_id === col.id);
             return { ...col, tasks: tasksForColumn };
@@ -81,7 +81,7 @@ const Home: React.FC = () => {
         console.log("No data available in 'Task Details' node.");
       }
     });
-  
+
     return () => {
       unsubscribeColumns();
       unsubscribeTasks();
@@ -147,24 +147,24 @@ const Home: React.FC = () => {
     }
   };
 
-// Function to handle adding a new column
-const addNewColumn = (newColumnTitle: string) => {
-  const database = getDatabase();
-  const columnsRef = ref(database, "Columns");
+  // Function to handle adding a new column
+  const addNewColumn = (newColumnTitle: string) => {
+    const database = getDatabase();
+    const columnsRef = ref(database, "Columns");
 
-  const newColumn = {
-    title: newColumnTitle,
+    const newColumn = {
+      title: newColumnTitle,
+    };
+
+    const newColumnRef = push(columnsRef);
+    set(newColumnRef, newColumn)
+      .then(() => {
+        toast.error("New column added successfully.");
+      })
+      .catch((error) => {
+        toast.error("Error adding new column:", error);
+      });
   };
-
-  const newColumnRef = push(columnsRef);
-  set(newColumnRef, newColumn)
-    .then(() => {
-      toast.error("New column added successfully.");
-    })
-    .catch((error) => {
-      toast.error("Error adding new column:", error);
-    });
-};
 
   const editColumnTitle = (id: string, newTitle: string) => {
     setColumns((prev) =>
@@ -178,17 +178,17 @@ const addNewColumn = (newColumnTitle: string) => {
       alert("You cannot delete the first column.");
       return;
     }
-  
+
     // Proceed with deletion if it's not the first column
     const database = getDatabase();
     const columnRef = ref(database, `Columns/${id}`);
     remove(columnRef); // Remove the column from Firebase
-  
+
     // Update the columns state
     setColumns((prev) => prev.filter((col) => col.id !== id));
   };
-  
-  
+
+
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -206,11 +206,11 @@ const addNewColumn = (newColumnTitle: string) => {
   return (
     <div className="container-xl bg-[#f4f6f8] rounded-t-xl" style={{ height: "100vh" }}>
       <div className="layout-body-wrapper ml-6 pt-6 grid grid-cols-2">
-        <Searchbar 
-        onSearchChange={handleSearchChange} 
-        showFilter={false} 
-        width={"120%"} 
-        height={60} />
+        <Searchbar
+          onSearchChange={handleSearchChange}
+          showFilter={false}
+          width={"120%"}
+          height={60} />
         <div className="mb-4 mr-4 text-right">
           <input
             type="text"
@@ -262,18 +262,18 @@ const addNewColumn = (newColumnTitle: string) => {
                     {filteredTasks(column.tasks).map((task, index) => (
                       <Draggable key={task.id} draggableId={task.id} index={index}>
                         {(provided) => (
-                         <li
-                         ref={provided.innerRef}
-                         {...provided.draggableProps}
-                         {...provided.dragHandleProps}
-                         className="flex items-center py-2"
-                       >
-                         <input type="radio" className="mr-2" />
-                         <span className="font-semibold">{task.name}</span>
-                         {task.due_date && (
-                           <span className="ml-auto text-gray-500">Due: {task.due_date}</span>
-                         )}
-                       </li> 
+                          <li
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className="flex items-center py-2"
+                          >
+                            <input type="radio" className="mr-2" />
+                            <span className="font-semibold">{task.name}</span>
+                            {task.due_date && (
+                              <span className="ml-auto text-gray-500">Due: {task.due_date}</span>
+                            )}
+                          </li>
                         )}
                       </Draggable>
                     ))}
