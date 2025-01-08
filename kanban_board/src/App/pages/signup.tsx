@@ -91,16 +91,16 @@ const Signup = () => {
 
       <div className="w-full md:w-1/2 h-full bg-[#1a1a1a] flex flex-col p-5 justify-center">
         <div className="w-full flex flex-col max-w-[450px] mx-auto">
-          <div className="w-full flex flex-col mb-10 text-white text-center md:text-left">
+          <div className="w-full flex flex-col mb-4 text-white text-center md:text-left">
             <h3 className="text-3xl md:text-4xl font-bold mb-2">Sign Up</h3>
-            <p className="text-lg mb-1">Welcome! Please enter your information below to begin.</p>
+            <p className="mb-1">Welcome! Please enter your information below to begin.</p>
           </div>
 
-          <div className="w-full flex flex-col mb-3">
+          <div className="w-full flex flex-col">
             <input
               type="text"
               placeholder="User Name"
-              className="w-full text-white py-2 mb-2 bg-transparent border-b border-gray-500 focus:outline-none focus:border-white"
+              className="w-full text-white py-2 bg-transparent border-b border-gray-500 focus:outline-none focus:border-white"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -139,7 +139,7 @@ const Signup = () => {
             </button>
           </div>
 
-          <div className="w-full flex items-center justify-center relative py-4">
+          <div className="w-full flex items-center justify-center relative py-2">
             <div className="w-full h-[1px] bg-gray-500"></div>
             <p className="text-lg absolute text-gray-500 bg-[#1a1a1a] px-2">OR</p>
           </div>
