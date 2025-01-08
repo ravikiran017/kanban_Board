@@ -36,7 +36,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/addtask" element={<AddTask />} />
           <Route path="/addtask/:id" element={<AddTask />} />
           <Route path="task" element={<Task />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </AppLayout>
       <ToastContainer />
